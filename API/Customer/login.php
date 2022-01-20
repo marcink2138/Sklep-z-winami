@@ -1,5 +1,7 @@
 <?php
-include_once 'CustomerManagement/CustomerAPI.php';
+include_once '../CustomerManagement/CustomerAPI.php';
+include_once '../errorfun.php';
+register_shutdown_function('my_error_handler');
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");

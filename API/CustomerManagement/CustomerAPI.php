@@ -1,6 +1,6 @@
 <?php
-include_once 'CustomerManagement/CustomerManagement.php';
-include_once 'DatabaseConnection/DatabaseConn.php';
+include_once '../CustomerManagement/CustomerManagement.php';
+include_once '../DatabaseConnection/DatabaseConn.php';
 
 class CustomerAPI
 {
