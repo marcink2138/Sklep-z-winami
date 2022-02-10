@@ -1,0 +1,15 @@
+import React from "react";
+import './helloPage.scss';
+import history from '../history';
+export class ImportWindow extends React.Component {
+
+    render() { 
+        return (
+            <div className="container">
+                <h3>Jeśli jesteś importerem, przejdź do strony logowania dla importerów</h3>
+                <button type="button" className="btn" onClick={() => history.push('/ImporterLoginPage')}>Logowanie dla importerów</button>
+            </div>
+        )
+    }
+
+}

@@ -6,8 +6,8 @@ export class Login extends React.Component {
         super(props);
     }
 
-    handleEmailChange = (e) => {
-        this.setState({email: e.target.value});
+    handleLoginChange = (e) => {
+        this.setState({login: e.target.value});
     }
     
     handlePasswordChange = (e) => {
@@ -16,12 +16,12 @@ export class Login extends React.Component {
 
     handleLogin = (e) => {
         console.log(this.state.password);
-        console.log(this.state.email);
+        console.log(this.state.login);
         const data = {
-            email: this.state.email,
+            login: this.state.login,
             password: this.state.password
         };
-        fetch('https://s402340.labagh.pl/API/Customer/login.php', {
+        fetch('https://s402340.labagh.pl/API/Importer/login.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,8 +47,8 @@ export class Login extends React.Component {
                 </div>
                 <div className="form">
                     <div className="form-group">
-                        <label htmlFor="email">E-Mail</label>
-                        <input type="text" name="email"  onChange={this.handleEmailChange} placeholder="E-Mail"/>
+                        <label htmlFor="login">Login</label>
+                        <input type="text" name="login"  onChange={this.handleLoginChange} placeholder="Login"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Hasło</label>

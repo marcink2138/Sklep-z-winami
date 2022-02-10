@@ -7,22 +7,33 @@ export class Register extends React.Component {
         super(props);
     }
 
-    handleEmailChange = (e) => {
-        this.setState({email: e.target.value});
+    handleNameChange = (e) => {
+        this.setState({name: e.target.value});
     }
 
     handlePasswordChange = (e) => {
         this.setState({password: e.target.value});
     }
 
+    handleKrsChange = (e) => {
+        this.setState({krs: e.target.value});
+    }
+
+    handleLoginChange = (e) => {
+        this.setState({login: e.target.value});
+    }
+
+
     handleRegister = (e) => {
         console.log(this.state.password);
-        console.log(this.state.email);
+        console.log(this.state.login);
         const data = {
-            email: this.state.email,
-            password: this.state.password
+            name: this.state.name,
+            password: this.state.password,
+            krs: this.state.krs,
+            login: this.state.login
         };
-        fetch('https://s402340.labagh.pl/API/Customer/register.php', {
+        fetch('https://s402340.labagh.pl/API/Importer/register.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,12 +60,20 @@ export class Register extends React.Component {
                 <form>
                 <div className="form">
                     <div className="form-group">
-                        <label htmlFor="email">E-Mail</label>
-                        <input type="text" name="email" onChange={this.handleEmailChange} placeholder="E-Mail"/>
+                        <label htmlFor="name">Nazwa</label>
+                        <input type="text" name="name" onChange={this.handleNameChange} placeholder="Nazwa"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Hasło</label>
                         <input type="text" name="password" onChange={this.handlePasswordChange} placeholder="Hasło"/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="krs">KRS</label>
+                        <input type="text" name="krs" onChange={this.handleKrsChange} placeholder="KRS"/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="login">Login</label>
+                        <input type="text" name="login" onChange={this.handleLoginChange} placeholder="Login"/>
                     </div>
                 </div>
                 <div className="footer">
