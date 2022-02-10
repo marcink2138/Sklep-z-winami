@@ -1,5 +1,5 @@
 <?php
-
+include_once '../config/errorConfig.php';
 
 class CustomerManagement
 {
@@ -20,13 +20,13 @@ class CustomerManagement
         $this->conn = $conn;
     }
 
-    public function checkIfCustomerExist($login, $password)
+    public function checkIfCustomerExist($email, $password)
     {
-        $query = "SELECT * FROM customers WHERE login = :login AND password = :password";
+        $query = "SELECT * FROM customers WHERE email = :email AND password = :password";
         $stmt = $this->conn->prepare($query);
-        $this->login = htmlspecialchars(strip_tags($login));
+        $this->email = htmlspecialchars(strip_tags($email));
         $this->password = htmlspecialchars(strip_tags($password));
-        $stmt->bindParam(':login', $this->login);
+        $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':password', $this->password);
         $stmt->execute();
 
@@ -88,6 +88,42 @@ class CustomerManagement
         $stmt->execute();
         return $stmt->rowCount() == 0;
     }
+
+    public function addToBasket($data, $customerId){
+        $query = "INSERT INTO basket (id_customer, id_wine, amount) VALUES (:id_customer, :id_wine, :amount)";
+        $stmt = $this->conn->prepare($query);
+        $wineId = htmlspecialchars(strip_tags($data->wineId));
+        $customerId = htmlspecialchars(strip_tags($customerId));
+        $amount = htmlspecialchars(strip_tags($data->amount));
+        $stmt->bindParam(":id_customer", $customerId);
+        $stmt->bindParam(":id_wine", $wineId);
+        $stmt->bindParam(":amount", $amount);
+        try {
+            if ($stmt->execute())
+                return true;
+            return false;
+        }catch (PDOException $e){
+            echo $e;
+            return false;
+        }
+    }
+
+    public function deleteFromBasket($data, $customerId){
+        $ids = array_values($data->ids);
+        $query = "DELETE FROM basket WHERE id IN (" . implode(",", array_map('intval', $ids)) . ") AND id_customer = :id_customer";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id_customer", $customerId);
+        try {
+            if ($stmt->execute())
+                return true;
+            return false;
+        }catch (PDOException $e){
+            echo $e;
+            return false;
+        }
+    }
+
+    
 
     private function setParams($data)
     {
