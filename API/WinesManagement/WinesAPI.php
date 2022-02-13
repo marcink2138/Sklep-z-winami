@@ -111,4 +111,19 @@ class WinesAPI
         }
     }
 
+    public function filterWines(){
+        $data = json_decode(file_get_contents("php://input"));
+        $jwt = isset($data->jwt) ? $data->jwt : "";
+        TokenManagement::decodeToken($jwt);
+        $resultSet = $this->winesManagement->filterWines();
+        $filteredWinesList = array();
+        while ($row = $resultSet->fetch(PDO::FETCH_ASSOC)) {
+            $filteredWinesList[] = $row;
+        }
+        http_response_code(200);
+        echo json_encode(array(
+            'wines' => $filteredWinesList
+        ));
+    }
+
 }
