@@ -44,7 +44,17 @@ export default class ProductList extends React.Component {
         return(
             <div className="productList">
                 {wineList.map((wine) => (
-                    <Product name = {wine.name} price = {wine.price} id = {wine.id} img_path = {wine.img_path}/>
+                    <Product name = {wine.name} 
+                    price = {wine.price} 
+                    id = {wine.id} 
+                    img_path = {wine.img_path}
+                    country = {wine.country}
+                    strength = {wine.alcoholic_strength}
+                    capacity = {wine.capacity}
+                    quantity = {wine.quantity}
+                    type = {wine.wine_type}
+                    //importer = {wine.}
+                    />
                 ))}
             </div>
         )

@@ -99,45 +99,47 @@ export default class AddWine extends React.Component {
 
     render() {
         return (
-            <div className="userpageadd">
-                <div className="container-useradd">
-                    <div className="base-container">
-                        <div className="header">Dodaj Wino</div>
-                        <div className="content">
-                            <div className="form">
-                                <div className="form-group">
-                                    <label htmlFor="name">Nazwa:</label>
-                                    <input type="text" name="name" onChange={this.handleName} placeholder="Nazwa" />
+            <div className="App">
+                <div className="userpageadd">
+                    <div className="container-useradd">
+                        <div className="base-container">
+                            <div className="header">Dodaj Wino</div>
+                            <div className="content">
+                                <div className="form">
+                                    <div className="form-group">
+                                        <label htmlFor="name">Nazwa:</label>
+                                        <input type="text" name="name" onChange={this.handleName} placeholder="Nazwa" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="country">Kraj:</label>
+                                        <input type="text" name="country" onChange={this.handleCountry} placeholder="Kraj" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="price">Cena:</label>
+                                        <input type="text" name="price" onChange={this.handlePrice} placeholder="Cena" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="winetype">Typ:</label>
+                                        <input type="text" name="winetype" onChange={this.handleWineType} placeholder="Typ" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="capacity">Pojemność:</label>
+                                        <input type="text" name="capacity" onChange={this.handleCapacity} placeholder="Pojemność" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="alcoholicstrength">Procent:</label>
+                                        <input type="text" name="alcoholicstrength" onChange={this.handleAlcoholicStrength} placeholder="Procent" />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="img">Zdjecie: </label>
+                                        <input type="file" name="img" onChange={this.handleImage} />
+                                    </div>
                                 </div>
-                                <div className="form-group">
-                                    <label htmlFor="country">Kraj:</label>
-                                    <input type="text" name="country" onChange={this.handleCountry} placeholder="Kraj" />
+                                <div className="footer">
+                                    <button type="button" className="btn" onClick={this.handleDodaj}>
+                                        Dodaj
+                                    </button>
                                 </div>
-                                <div className="form-group">
-                                    <label htmlFor="price">Cena:</label>
-                                    <input type="text" name="price" onChange={this.handlePrice} placeholder="Cena" />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="winetype">Typ:</label>
-                                    <input type="text" name="winetype" onChange={this.handleWineType} placeholder="Typ" />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="capacity">Pojemność:</label>
-                                    <input type="text" name="capacity" onChange={this.handleCapacity} placeholder="Pojemność" />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="alcoholicstrength">Procent:</label>
-                                    <input type="text" name="alcoholicstrength" onChange={this.handleAlcoholicStrength} placeholder="Procent" />
-                                </div>
-                                <div>
-                                    <label htmlFor="img">Zdjecie: </label>
-                                    <input type="file" name="img" onChange={this.handleImage} />
-                                </div>
-                            </div>
-                            <div className="footer">
-                                <button type="button" className="btn" onClick={this.handleDodaj}>
-                                    Dodaj
-                                </button>
                             </div>
                         </div>
                     </div>

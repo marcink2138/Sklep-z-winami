@@ -39,16 +39,18 @@ export class Product extends React.Component {
             <div className="product" onClick={this.showInfo}>
                 <img width="200px" height="300px" src={`https://s402340.labagh.pl${this.props.img_path}`}/>
                 <div><h3>{this.props.name}</h3></div>
-                <div><h4>{this.props.price}</h4></div>
-                <button className="buttonProduct" onClick={this.addToCart}>Dodaj do koszyka</button>
                 <div class="dropdown">
-                    <button class="dropbtn">Dropdown</button>
+                    <button class="dropbtn">Więcej informacji</button>
                         <div class="dropdown-content">
-                            <a href="#">Kraj pochodzenia:</a>
-                            <a href="#">Zawartośc alkoholu:</a>
-                            <a href="#">Nazwa importera</a>
+                            <a>Kraj pochodzenia: {this.props.country}</a>
+                            <a>Zawartość alkoholu: {this.props.strength}</a>
+                            <a>Pojemność: {this.props.capacity}</a>
+                            <a>Typ: {this.props.type}</a>
+                            <a>Ilość dostępnych sztuk: {this.props.quantity}</a>
                         </div>
                 </div>
+                <div><h4>{this.props.price}</h4></div>
+                <button className="buttonProduct" onClick={this.addToCart}>Dodaj do koszyka</button>
             </div>
         )
     }

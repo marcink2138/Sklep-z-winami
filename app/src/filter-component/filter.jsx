@@ -193,16 +193,16 @@ export default class FilterComponent extends React.Component {
                         <h1>Po cenie</h1>
                         <select id="importerSelect" onChange={this.handlePriceChange} >
                             <option value=""></option>
-                            <option value='ASC'>Malejąco</option>
-                            <option value='DESC'>Rosnąco</option>
+                            <option value='ASC'>Rosnąco</option>
+                            <option value='DESC'>Malejąco</option>
                         </select>
                     </div>
                     <div className="filter">
                         <h1>Po nazwie</h1>
                         <select id="importerSelect" onChange={this.handleNameChange} >
                             <option value=""></option>
-                            <option value='ASC'>Malejąco</option>
                             <option value='DESC'>Rosnąco</option>
+                            <option value='ASC'>Malejąco</option>
                         </select>
                     </div>
                     <div>
