@@ -1,7 +1,8 @@
 import React from "react";
 import loginImg from "../login.jpg";
-import history from '../history';
-export class Login extends React.Component {
+import Cookies from 'js-cookie';
+import { withRouter } from "react-router";
+class LoginImporterComponent extends React.Component {
 
     constructor(props) {
         super(props);
@@ -32,6 +33,8 @@ export class Login extends React.Component {
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
+            Cookies.set('jwt', data.jwt);
+            this.props.history.push('/ImporterPage');
         })
         .catch((error) => {
             console.error('Error', error);
@@ -65,3 +68,5 @@ export class Login extends React.Component {
         </div> )
     }
 }
+
+export const LoginImporter = withRouter(LoginImporterComponent)

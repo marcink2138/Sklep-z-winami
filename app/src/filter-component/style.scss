@@ -18,6 +18,7 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    margin-top: 2%;
     
 }
 .filter{
@@ -30,7 +31,7 @@
     margin-right: 2.5%;
     margin-top: 5%;
     margin-bottom: 5%;
-    padding: 15px 30px;
+    padding: 15px 15px;
     justify-content: center;
     align-self: center;
     width: 10.5%;
@@ -55,4 +56,20 @@
     &:focus {
         outline: none;
     }
+}
+
+.navbarFilter {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    color: white;
+    background-color: rgba(219, 95, 37, 0.705);
+    padding: 25px 50px;
+}
+
+.navComponent {
+    font-size: 22px;
+    margin-left: 3%;
+    color: white;
+    position: relative;
 }

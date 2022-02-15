@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ProductList from "../product-component/productList";
 import './style.scss'
 import Cookies from 'js-cookie'
+import { withRouter } from "react-router";
 export default class FilterComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -160,6 +161,11 @@ export default class FilterComponent extends React.Component {
         const importerList = this.state.importerNamesList;
         return (
             <div>
+                <div className="navbarFilter">
+                    <div className="navComponent" onClick={() => {this.props.history.push('/')}}>Wybór użytkownika</div>
+                    <div className="navComponent" onClick={() => {this.props.history.push('/ProductList')}}>Strona główna</div>
+                    <div className="navComponent" onClick={() => {this.props.history.push('/UserPage')}}>Koszyk</div>
+                </div>
                 <div className="filters">
                     {this.state.isCountryListPresent &&
                         <div className="filter">
@@ -210,3 +216,5 @@ export default class FilterComponent extends React.Component {
         )
     }
 }
+
+export const filter = withRouter(FilterComponent)

@@ -1,5 +1,5 @@
 import "./style.scss"
 
-export { Login } from "./login";
+export { LoginImporter } from "./login"
 export { Register } from "./register";
 

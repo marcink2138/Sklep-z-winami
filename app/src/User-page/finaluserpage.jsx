@@ -3,7 +3,7 @@ import profilePicture from "../userdefault.png";
 import "./style.scss";
 import { UserPage, Basket } from ".";
 
-export class FinalUserPage extends React.Component {
+export default class FinalUserPage extends React.Component {
 
     constructor(props) {
         super(props)

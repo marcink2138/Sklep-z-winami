@@ -3,7 +3,7 @@ import profilePicture from "../userdefault.png";
 import "./style.scss";
 import { ImporterPage, Imports } from ".";
 
-export class FinalImporterPage extends React.Component {
+export default class FinalImporterPage extends React.Component {
 
     constructor(props) {
         super(props)

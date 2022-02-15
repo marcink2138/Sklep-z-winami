@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./style.scss";
 import Cookies from 'js-cookie'
 
-export class AddWine extends React.Component {
+export default class AddWine extends React.Component {
 
     constructor(props) {
         super(props);

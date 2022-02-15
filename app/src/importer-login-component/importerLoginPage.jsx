@@ -1,5 +1,5 @@
 import './App.scss';
-import { Login, Register } from "./";
+import { LoginImporter, Register } from "./";
 import React from 'react';
 
 export default class ImporterLoginPage extends React.Component {
@@ -37,7 +37,7 @@ export default class ImporterLoginPage extends React.Component {
         <div className="login">
           <div className="container" ref={ref => (this.container = ref)}>
             {isLogginActive && (
-              <Login containerRef={ref => (this.current = 'Zaloguj')} />
+              <LoginImporter containerRef={ref => (this.current = 'Zaloguj')} />
             )}
             {!isLogginActive && (
               <Register containerRef={ref => (this.current = 'Zarejestruj')} />

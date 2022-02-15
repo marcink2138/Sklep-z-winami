@@ -3,8 +3,9 @@ import profilePicture from "../userdefault.png";
 import "./style.scss";
 import Order from "./order";
 import Cookies from 'js-cookie'
+import { withRouter } from "react-router";
 
-export class Imports extends React.Component {
+export class ImportsComponent extends React.Component {
 
     constructor(props){
         super(props);
@@ -49,7 +50,8 @@ export class Imports extends React.Component {
     }
 
     ButtonPress = (e) => {
-        //przejscie do
+        //przejscie do//xx
+        this.props.history.push('/AddWinePage');
     }
 
     render(){
@@ -87,3 +89,5 @@ export class Imports extends React.Component {
         </div>);
 }
 }
+
+export const Imports = withRouter(ImportsComponent);

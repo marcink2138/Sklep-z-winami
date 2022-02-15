@@ -29,8 +29,7 @@
     position: relative;
     z-index: 99;
     width: 19%;
-    height: auto;
-    z-index: 99;
+    height: 45%;
     margin-left: 1.5%;
     margin-right: 1.5%;
     margin-top: 2%;
@@ -59,3 +58,54 @@
         outline: none;
     }
 }
+
+.dropbtn {
+    background-color: red;
+    color: white;
+    position: relative;
+    border: 0;
+    padding: 5px;
+    font-size: 18px;
+    border-radius: 3px;
+    transition: all 250ms ease-in-out;
+    cursor: pointer;
+    &:hover {
+        background-color: red;
+    }
+    &:focus {
+        outline: none;
+    }
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 1000000;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 500;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+    z-index: 100000;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: #13df46;
+  }
