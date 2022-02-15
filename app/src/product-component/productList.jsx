@@ -44,7 +44,7 @@ export default class ProductList extends React.Component {
         return(
             <div className="productList">
                 {wineList.map((wine) => (
-                    <Product name = {wine.name} price = {wine.price} id = {wine.id}/>
+                    <Product name = {wine.name} price = {wine.price} id = {wine.id} img_path = {wine.img_path}/>
                 ))}
             </div>
         )

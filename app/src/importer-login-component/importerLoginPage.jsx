@@ -2,8 +2,6 @@ import './App.scss';
 import { Login, Register } from "./";
 import React from 'react';
 
-
-
 export default class ImporterLoginPage extends React.Component {
   constructor(props) {
     super(props);

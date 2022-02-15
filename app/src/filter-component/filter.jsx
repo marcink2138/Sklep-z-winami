@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ProductList from "../product-component/productList";
 import './style.scss'
+import Cookies from 'js-cookie'
 export default class FilterComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -28,7 +29,7 @@ export default class FilterComponent extends React.Component {
 
     getImporterList() {
         const data = {
-            jwt: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDQ5MzM5NzAsIm5iZiI6MTY0NDkzMzk3MCwiZXhwIjoxNjQ0OTUxOTcwLCJpc3MiOiJodHRwczovL3M0MDIzNDAubGFiYWdoLnBsL0FQSSIsImRhdGEiOnsiaWQiOiI5IiwiYWNjVHlwZSI6IkN1c3RvbWVyIn19.NpsZezoNEP2s2anG0GG0FzIw27i2paSNIr8CapMKDtE"
+            jwt: Cookies.get('jwt')
         }
         fetch('https://s402340.labagh.pl/API/Importer/get-all-importers.php', {
             method: 'POST',
@@ -49,7 +50,7 @@ export default class FilterComponent extends React.Component {
 
     getCountryList() {
         const data = {
-            jwt: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDQ5MzM5NzAsIm5iZiI6MTY0NDkzMzk3MCwiZXhwIjoxNjQ0OTUxOTcwLCJpc3MiOiJodHRwczovL3M0MDIzNDAubGFiYWdoLnBsL0FQSSIsImRhdGEiOnsiaWQiOiI5IiwiYWNjVHlwZSI6IkN1c3RvbWVyIn19.NpsZezoNEP2s2anG0GG0FzIw27i2paSNIr8CapMKDtE"
+            jwt: Cookies.get('jwt')
         }
         fetch('https://s402340.labagh.pl/API/Wines/countries.php', {
             method: 'POST',
@@ -71,7 +72,7 @@ export default class FilterComponent extends React.Component {
     getWinesWithoutFilters(){
         this.setState({areFilteredWinesPresent:false})
         const data = {
-            jwt: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDQ5MzM5NzAsIm5iZiI6MTY0NDkzMzk3MCwiZXhwIjoxNjQ0OTUxOTcwLCJpc3MiOiJodHRwczovL3M0MDIzNDAubGFiYWdoLnBsL0FQSSIsImRhdGEiOnsiaWQiOiI5IiwiYWNjVHlwZSI6IkN1c3RvbWVyIn19.NpsZezoNEP2s2anG0GG0FzIw27i2paSNIr8CapMKDtE"
+            jwt: Cookies.get('jwt')
         }
         fetch(`https://s402340.labagh.pl/API/Wines/filter-wines.php`, {
             method: 'POST',
@@ -124,7 +125,7 @@ export default class FilterComponent extends React.Component {
             tempParamString = ""
 
         const data = {
-            jwt: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDQ5MzM5NzAsIm5iZiI6MTY0NDkzMzk3MCwiZXhwIjoxNjQ0OTUxOTcwLCJpc3MiOiJodHRwczovL3M0MDIzNDAubGFiYWdoLnBsL0FQSSIsImRhdGEiOnsiaWQiOiI5IiwiYWNjVHlwZSI6IkN1c3RvbWVyIn19.NpsZezoNEP2s2anG0GG0FzIw27i2paSNIr8CapMKDtE"
+            jwt: Cookies.get('jwt')
         }
         fetch(`https://s402340.labagh.pl/API/Wines/filter-wines.php${tempParamString}`, {
             method: 'POST',
