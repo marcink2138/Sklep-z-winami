@@ -154,4 +154,26 @@ class CustomerAPI
         }
     }
 
+    public function getCustomerData(){
+        $data = json_decode(file_get_contents("php://input"));
+        $jwt = isset($data->jwt) ? $data->jwt : "";
+        $customerData = TokenManagement::decodeToken($jwt);
+        if ($customerData->accType == CustomerAPI::$accType) {
+            $resultSet = $this->customerManagement->getCustomerData($customerData->id);
+            $dataFromDB = array();
+            while ($row = $resultSet->fetch(PDO::FETCH_ASSOC)) {
+                $dataFromDB[] = $row;
+            }
+            http_response_code(200);
+            echo json_encode(array(
+                'customerData' => $dataFromDB
+            ));
+        } else {
+            http_response_code(403);
+            echo json_encode(array(
+                "message" => "Access denied!"
+            ));
+        }
+    }
+
 }

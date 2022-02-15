@@ -15,8 +15,15 @@ class WinesManagement
     {
         $query = "SELECT DISTINCT country FROM wine";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        return $stmt;
+        try {
+            $stmt->execute();
+            return $stmt;
+        } catch (PDOException $e) {
+            http_response_code(500);
+            die(json_encode(array(
+                "message" => "DB error"
+            )));
+        }
     }
 
     public function getWinesFromCountry($country)
@@ -24,8 +31,15 @@ class WinesManagement
         $query = "SELECT * FROM wine WHERE country = :country";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':country', $country);
-        $stmt->execute();
-        return $stmt;
+        try {
+            $stmt->execute();
+            return $stmt;
+        } catch (PDOException $e) {
+            http_response_code(500);
+            die(json_encode(array(
+                "message" => "DB error"
+            )));
+        }
     }
 
     public function createNewWine($data, $importerId, $imgPath)
@@ -66,8 +80,16 @@ class WinesManagement
         if (isset($this->params['importerName'])) {
             $stmt->bindParam(":importerName", $this->params['importerName']);
         }
-        $stmt->execute();
-        return $stmt;
+        try {
+            $stmt->execute();
+            return $stmt;
+        } catch (PDOException $e) {
+            http_response_code(500);
+            die(json_encode(array(
+                "message" => "DB error"
+            )));
+        }
+
     }
 
     private function getFilters()
