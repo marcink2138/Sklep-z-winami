@@ -8,7 +8,7 @@ function Order(props) {
     const [winneId] = useState(props.id);
     console.log(winneId);
     const [howMany, setHowMany] = useState(props.amount);
-    const [xd] = useState(0);
+    const [xd, setXd] = useState(0);
 
     const DeleteButtonClick = () => {
         let json
@@ -32,7 +32,7 @@ function Order(props) {
                 //data = data.wines;
                 //console.log(data);
                 //console.log(this.state.ShouldWeRender);
-                this.setState({xd: 0});
+                setXd(1);
                 json = data;
             })
             .catch((error) => {

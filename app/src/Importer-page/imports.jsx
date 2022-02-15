@@ -72,6 +72,7 @@ export class Imports extends React.Component {
                                     wine_type={order.wine_type}
                                     alcoholic_strength={order.alcoholic_strength}
                                     id={order.id}
+                                    img_path={order.img_path}
                                 />
                             ))
                         }

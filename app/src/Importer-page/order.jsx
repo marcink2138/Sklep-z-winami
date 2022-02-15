@@ -58,7 +58,7 @@ function Order(props) {
                 </div>
                 <div className="content2">
                     <div className="image">
-                        <img src={profilePicture} />
+                        <img src={`https://s402340.labagh.pl${props.img_path}`}/>
                     </div>
                     <div className="form">
                         <div className="form-group">

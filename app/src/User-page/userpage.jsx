@@ -8,8 +8,8 @@ export class UserPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ShouldWeRender: false,
-            Data: [],
+            ShouldWeRender: true,
+            Data: ["user"],
             name: "",
             krs: "",
             winesNumber: ""
@@ -67,19 +67,13 @@ export class UserPage extends React.Component {
                                         <label htmlFor="Name">Login: </label>
                                     </div>
                                     <div className="form-group2">
-                                        <label htmlFor="Name2">{user.login}</label>
+                                        <label htmlFor="Name2">login</label>
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="KRS">KRS: </label>
+                                        <label htmlFor="KRS">Adress: </label>
                                     </div>
                                     <div className="form-group2">
-                                        <label htmlFor="KRS2">{user.krs}</label>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="Login">Liczba win: </label>
-                                    </div>
-                                    <div className="form-group2">
-                                        <label htmlFor="Login2">{user.winesNumber}</label>
+                                        <label htmlFor="KRS2">adress</label>
                                     </div>
                                 </div>))}
                             {/* <div className="footer">

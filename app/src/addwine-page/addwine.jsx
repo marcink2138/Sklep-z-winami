@@ -47,7 +47,7 @@ export class AddWine extends React.Component {
     }
 
     handleGoToUser = (e) => {
-        //przejsc do user lub importera
+        //przejsc do importera
     }
 
     handleDodaj = (e) => {
@@ -93,6 +93,7 @@ export class AddWine extends React.Component {
                 .catch((error) => {
                     console.error('Error', error);
                 });
+            //przejs do importera
         }
     }
 
