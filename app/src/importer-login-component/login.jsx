@@ -1,5 +1,6 @@
 import React from "react";
 import loginImg from "../login.jpg";
+import history from '../history';
 export class Login extends React.Component {
 
     constructor(props) {

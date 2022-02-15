@@ -1,5 +1,6 @@
 import React from "react";
 import loginImg from "../login.jpg";
+import history from '../history';
 export class Login extends React.Component {
 
     constructor(props) {
@@ -31,6 +32,7 @@ export class Login extends React.Component {
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
+            history.push('/ProductList');
         })
         .catch((error) => {
             console.error('Error', error);
