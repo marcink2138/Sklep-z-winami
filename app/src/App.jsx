@@ -9,9 +9,7 @@ import Routes from './Routes';
 class App extends React.Component {
     render() { return( 
         <Router>
-          <div>
-            <Routes/>
-          </div>
+            <Routes/>  
         </Router>
       )
     }

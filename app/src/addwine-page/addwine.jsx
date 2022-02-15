@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./style.scss";
+import Cookies from 'js-cookie'
 
 export class AddWine extends React.Component {
 
@@ -24,7 +25,7 @@ export class AddWine extends React.Component {
         this.setState({ country: e.target.value });
     }
 
-    handlePrice= (e) => {
+    handlePrice = (e) => {
         this.setState({ price: e.target.value });
     }
 
@@ -32,7 +33,7 @@ export class AddWine extends React.Component {
         this.setState({ winetype: e.target.value });
     }
 
-    handleCapacity= (e) => {
+    handleCapacity = (e) => {
         this.setState({ capacity: e.target.value });
     }
 
@@ -42,7 +43,11 @@ export class AddWine extends React.Component {
 
     handleImage = (e) => {
         console.log(e)
-        this.setState({img: e.target.files[0]});
+        this.setState({ img: e.target.files[0] });
+    }
+
+    handleGoToUser = (e) => {
+        //przejsc do importera
     }
 
     handleDodaj = (e) => {
@@ -53,46 +58,49 @@ export class AddWine extends React.Component {
         console.log(this.state.capacity)
         console.log(this.state.alcoholicstrength)
         console.log(this.state.img)
-        const formData = new FormData();
+        if (this.state.name != "" && this.state.country != "" && this.state.price != "" && this.state.winetype != "" && this.state.capacity != "" && this.state.alcoholicstrength && this.state.img != "") {
+            const formData = new FormData();
 
-        formData.append('sendImage', this.state.img);
+            formData.append('sendImage', this.state.img);
 
-        const data = {
-            jwt: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDQ4Mzk1MDMsIm5iZiI6MTY0NDgzOTUwMywiZXhwIjoxNjQ0ODU3NTAzLCJpc3MiOiJodHRwczovL3M0MDIzNDAubGFiYWdoLnBsL0FQSSIsImRhdGEiOnsiaWQiOiIxIiwiYWNjVHlwZSI6IkltcG9ydGVyIn19.g7PMjsIzOf4KoGxYY3dL6OJR2F7RPUZ045QGypbh35k",
-            name: this.state.name,
-            country: this.state.country,
-            price: this.state.price,
-            wineType: this.state.winetype,
-            capacity: this.state.capacity,
-            alcoholicStrength: this.state.alcoholicstrength
-        };
+            const data = {
+                jwt: Cookies.get('jwt'),
+                name: this.state.name,
+                country: this.state.country,
+                price: this.state.price,
+                wineType: this.state.winetype,
+                capacity: this.state.capacity,
+                alcoholicStrength: this.state.alcoholicstrength
+            };
 
-        formData.append('data', JSON.stringify(data));
+            formData.append('data', JSON.stringify(data));
 
-        console.log(JSON.stringify(data))
-        console.log(formData)
+            console.log(JSON.stringify(data))
+            console.log(formData)
 
 
-        fetch('https://s402340.labagh.pl/API/Wines/create-new-wine.php', {
-            method: 'POST',
-            // headers: {
-            //     'Content-Type': 'multipart/form-data',
-            // },
-            body: formData,
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Error', error);
-        });
+            fetch('https://s402340.labagh.pl/API/Wines/create-new-wine.php', {
+                method: 'POST',
+                // headers: {
+                //     'Content-Type': 'multipart/form-data',
+                // },
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Error', error);
+                });
+            //przejs do importera
+        }
     }
 
     render() {
         return (
-            <div className="userpage">
-                <div className="container-user">
+            <div className="userpageadd">
+                <div className="container-useradd">
                     <div className="base-container">
                         <div className="header">Dodaj Wino</div>
                         <div className="content">
@@ -114,15 +122,15 @@ export class AddWine extends React.Component {
                                     <input type="text" name="winetype" onChange={this.handleWineType} placeholder="Typ" />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="capacity">Ilość:</label>
-                                    <input type="text" name="capacity" onChange={this.handleCapacity} placeholder="Ilość" />
+                                    <label htmlFor="capacity">Pojemność:</label>
+                                    <input type="text" name="capacity" onChange={this.handleCapacity} placeholder="Pojemność" />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="alcoholicstrength">Procent:</label>
                                     <input type="text" name="alcoholicstrength" onChange={this.handleAlcoholicStrength} placeholder="Procent" />
                                 </div>
                                 <div>
-                                    <label htmlFor="img">Zdjecie:</label>
+                                    <label htmlFor="img">Zdjecie: </label>
                                     <input type="file" name="img" onChange={this.handleImage} />
                                 </div>
                             </div>
