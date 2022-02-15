@@ -33,14 +33,20 @@ class TokenManagement
                 return $decoded->data;
             }catch (\Firebase\JWT\ExpiredException $e){
                 http_response_code(403);
-                die(json_encode($e->getMessage()));
+                die(json_encode(array(
+                    "message"=>$e->getMessage()
+                )));
             }catch (UnexpectedValueException $e){
                 http_response_code(500);
-                die(json_encode("JWT internal error"));
+                die(json_encode(array(
+                    "message"=>"JWT internal error"
+                )));
             }
         }else{
             http_response_code(403);
-            die(json_encode('JWT required'));
+            die(json_encode(array(
+                "message"=>'JWT required'
+            )));
         }
     }
 

@@ -28,25 +28,31 @@ class CustomerManagement
         $this->password = htmlspecialchars(strip_tags($password));
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':password', $this->password);
-        $stmt->execute();
-
-        $rowNumber = $stmt->rowCount();
-
-        if ($rowNumber == 1) {
-            $resultSet = $stmt->fetch(PDO::FETCH_ASSOC);
-            $this->id = $resultSet['id'];
-            $this->first_name = $resultSet['first_name'];
-            $this->last_name = $resultSet['last_name'];
-            $this->address_city = $resultSet['address_city'];
-            $this->address_postal_code = $resultSet['address_postal_code'];
-            $this->address_street = $resultSet['address_street'];
-            $this->email = $resultSet['email'];
-            $this->mobile = $resultSet['mobile'];
-            return true;
+        try {
+            $stmt->execute();
+            $rowNumber = $stmt->rowCount();
+            if ($rowNumber == 1) {
+                $resultSet = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->id = $resultSet['id'];
+                $this->first_name = $resultSet['first_name'];
+                $this->last_name = $resultSet['last_name'];
+                $this->address_city = $resultSet['address_city'];
+                $this->address_postal_code = $resultSet['address_postal_code'];
+                $this->address_street = $resultSet['address_street'];
+                $this->email = $resultSet['email'];
+                $this->mobile = $resultSet['mobile'];
+                return true;
+            }
+            $this->login = '';
+            $this->password = '';
+            return false;
+        }catch (PDOException $e){
+            http_response_code(500);
+            die(json_encode(array(
+                "message"=>"DB error"
+            )));
         }
-        $this->login = '';
-        $this->password = '';
-        return false;
+
     }
 
     public function registerNewCustomer($data)
@@ -73,10 +79,18 @@ class CustomerManagement
         $stmt->bindParam(":password", $this->password);
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":mobile", $this->mobile);
-        if ($stmt->execute()) {
-            return true;
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+        }catch (PDOException $e){
+            http_response_code(500);
+            die(json_encode(array(
+                "message"=>"DB error"
+            )));
         }
-        return false;
+
     }
 
     public function checkIfEmailExist($email)
@@ -85,8 +99,15 @@ class CustomerManagement
         $stmt = $this->conn->prepare($query);
         $tempEmail = htmlspecialchars(strip_tags($email));
         $stmt->bindParam(":email", $tempEmail);
-        $stmt->execute();
-        return $stmt->rowCount() == 0;
+        try {
+            $stmt->execute();
+            return $stmt->rowCount() == 0;
+        }catch (PDOException $e){
+            http_response_code(500);
+            die(json_encode(array(
+                "message"=>"DB error"
+            )));
+        }
     }
 
     public function addToBasket($data, $customerId){
@@ -103,34 +124,54 @@ class CustomerManagement
                 return true;
             return false;
         }catch (PDOException $e){
-            echo $e;
             return false;
         }
     }
 
     public function getBasket($customerId){
-        $query = "SELECT basket.id, wine.name as wineName, basket.amount FROM basket, wine WHERE id_customer = :id_customer AND wine.id = id_wine";
+        $query = "SELECT wine.name as wineName, wine.id as wineId, count(basket.amount) as amount FROM basket, wine WHERE id_customer = :id_customer AND wine.id = id_wine GROUP BY wineName, wineId";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":id_customer", $customerId);
-        $stmt->execute();
-        return $stmt;
+        try {
+            $stmt->execute();
+            return $stmt;
+        }catch (PDOException $e){
+            http_response_code(500);
+            die(json_encode(array(
+                "message"=>"DB error"
+            )));
+        }
     }
 
     public function deleteFromBasket($data, $customerId){
-        $ids = array_values($data->ids);
-        $query = "DELETE FROM basket WHERE id IN (" . implode(",", array_map('intval', $ids)) . ") AND id_customer = :id_customer";
+        $wineId = $data->wineId;
+        $query = "DELETE FROM basket WHERE id_customer = :id_customer AND id_wine = :id_wine";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":id_customer", $customerId);
+        $stmt->bindParam(":id_wine", $wineId);
         try {
             if ($stmt->execute())
                 return true;
             return false;
         }catch (PDOException $e){
-            echo $e;
             return false;
         }
     }
 
+    public function getCustomerData($customerId){
+        $query = "SELECT first_name, last_name, address_city, address_postal_code, address_street, email, mobile FROM customers WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id", $customerId);
+        try {
+            $stmt->execute();
+            return $stmt;
+        }catch (PDOException $e){
+            http_response_code(500);
+            die(json_encode(array(
+                "message"=>"DB error"
+            )));
+        }
+    }
     
 
     private function setParams($data)
