@@ -4,6 +4,7 @@ include_once '../config/errorConfig.php';
 class WinesManagement
 {
     private $conn;
+    private $params;
 
     public function __construct($conn)
     {
@@ -59,14 +60,12 @@ class WinesManagement
             }
         }
         $stmt = $this->conn->prepare($query);
-        if (isset($_GET['country'])) {
-            $stmt->bindParam(":country", $_GET['country']);
-            echo $_GET['country'];
+        if (isset($this->params['country'])) {
+            $stmt->bindParam(":country", $this->params['country']);
         }
-        if (isset($_GET['importerName'])) {
-            $stmt->bindParam(":importerName", $_GET['importerName']);
+        if (isset($this->params['importerName'])) {
+            $stmt->bindParam(":importerName", $this->params['importerName']);
         }
-        echo $query;
         $stmt->execute();
         return $stmt;
     }
@@ -74,26 +73,31 @@ class WinesManagement
     private function getFilters()
     {
         $filters = array();
-        if (isset($_GET['country'])) {
+        $url = $_SERVER['REQUEST_URI'];
+        $urlComponents = parse_url($url);
+        if (isset($urlComponents['query'])) {
+            parse_str($urlComponents['query'], $this->params);
+        }
+        if (isset($this->params['country'])) {
             $filters[] = " AND country = :country";
         }
-        if (isset($_GET['importerName'])) {
-            $filters[] = " AND id_importer = (SELECT id_importer FROM importer WHERE name = :name)";
+        if (isset($this->params['importerName'])) {
+            $filters[] = " AND id_importer = (SELECT id_importer FROM importer WHERE name = :importerName)";
         }
-        if (isset($_GET['price'])) {
-            if ($_GET['price'] == "DESC") {
+        if (isset($this->params['price'])) {
+            if ($this->params['price'] == "DESC") {
                 $filters[] = " ORDER BY price DESC";
             } else {
                 $filters[] = " ORDER BY price ASC";
             }
-        } elseif (isset($_GET['quantity'])) {
-            if ($_GET['quantity'] == "DESC") {
+        } elseif (isset($this->params['quantity'])) {
+            if ($this->params['quantity'] == "DESC") {
                 $filters[] = " ORDER BY quantity DESC";
             } else {
                 $filters[] = " ORDER BY quantity ASC";
             }
-        } elseif (isset($_GET['name'])) {
-            if ($_GET['name'] == "DESC") {
+        } elseif (isset($this->params['name'])) {
+            if ($this->params['name'] == "DESC") {
                 $filters[] = " ORDER BY name DESC";
             } else {
                 $filters[] = " ORDER BY name ASC";

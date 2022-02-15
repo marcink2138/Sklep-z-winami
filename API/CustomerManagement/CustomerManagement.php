@@ -108,6 +108,14 @@ class CustomerManagement
         }
     }
 
+    public function getBasket($customerId){
+        $query = "SELECT basket.id, wine.name as wineName, basket.amount FROM basket, wine WHERE id_customer = :id_customer AND wine.id = id_wine";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id_customer", $customerId);
+        $stmt->execute();
+        return $stmt;
+    }
+
     public function deleteFromBasket($data, $customerId){
         $ids = array_values($data->ids);
         $query = "DELETE FROM basket WHERE id IN (" . implode(",", array_map('intval', $ids)) . ") AND id_customer = :id_customer";

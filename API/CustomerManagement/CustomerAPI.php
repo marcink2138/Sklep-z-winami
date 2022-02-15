@@ -86,45 +86,70 @@ class CustomerAPI
         $jwt = isset($data->jwt) ? $data->jwt : "";
         $customerData = TokenManagement::decodeToken($jwt);
         if ($customerData->accType == CustomerAPI::$accType) {
-            if ($this->customerManagement->addToBasket($data, $customerData->id)){
+            if ($this->customerManagement->addToBasket($data, $customerData->id)) {
                 http_response_code(200);
                 echo json_encode(array(
-                    "message"=>"Element added successful"
+                    "message" => "Element added successful"
                 ));
-            }else{
+            } else {
                 http_response_code(400);
                 echo json_encode(array(
-                    "message"=>"Something went wrong. Check if requested amount is at least equal to stock amount."
+                    "message" => "Something went wrong. Check if requested amount is at least equal to stock amount."
                 ));
             }
-        }else{
+        } else {
             http_response_code(403);
             echo json_encode(array(
-                "message"=>"Access denied!"
+                "message" => "Access denied!"
             ));
         }
     }
 
-    public function deleteFromBasket(){
+    public function getBasket()
+    {
         $data = json_decode(file_get_contents("php://input"));
         $jwt = isset($data->jwt) ? $data->jwt : "";
         $customerData = TokenManagement::decodeToken($jwt);
         if ($customerData->accType == CustomerAPI::$accType) {
-            if ($this->customerManagement->deleteFromBasket($data, $customerData->id)){
-                http_response_code(200);
-                echo json_encode(array(
-                    "message"=>"Element(s) deleted successful"
-                ));
-            }else{
-                http_response_code(400);
-                echo json_encode(array(
-                    "message"=>"Something went wrong."
-                ));
+            $resultSet = $this->customerManagement->getBasket($customerData->id);
+            $basket = array();
+            while ($row = $resultSet->fetch(PDO::FETCH_ASSOC)) {
+                $basket[] = $row;
             }
-        }else{
+            http_response_code(200);
+            echo json_encode(array(
+                'basket' => $basket
+            ));
+        } else {
             http_response_code(403);
             echo json_encode(array(
-                "message"=>"Access denied!"
+                "message" => "Access denied!"
+            ));
+        }
+    }
+
+
+    public function deleteFromBasket()
+    {
+        $data = json_decode(file_get_contents("php://input"));
+        $jwt = isset($data->jwt) ? $data->jwt : "";
+        $customerData = TokenManagement::decodeToken($jwt);
+        if ($customerData->accType == CustomerAPI::$accType) {
+            if ($this->customerManagement->deleteFromBasket($data, $customerData->id)) {
+                http_response_code(200);
+                echo json_encode(array(
+                    "message" => "Element(s) deleted successful"
+                ));
+            } else {
+                http_response_code(400);
+                echo json_encode(array(
+                    "message" => "Something went wrong."
+                ));
+            }
+        } else {
+            http_response_code(403);
+            echo json_encode(array(
+                "message" => "Access denied!"
             ));
         }
     }
