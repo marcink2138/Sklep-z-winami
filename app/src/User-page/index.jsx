@@ -1,4 +1,5 @@
 import "./style.scss";
 
-export { default as UserPage} from "./userpage";
-export { default as Basket} from "./basket";
+export { UserPage } from "./userpage";
+export { Basket } from "./basket";
+export { FinalUserPage } from "./finaluserpage"

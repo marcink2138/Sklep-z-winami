@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import profilePicture from "../userdefault.png";
 import "./style.scss";
+import Cookies from 'js-cookie'
 
 export class ImporterPage extends React.Component {
 
@@ -22,7 +23,7 @@ export class ImporterPage extends React.Component {
     GetImporter() {
         let json
         const data = {
-            jwt: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDQ4Mzk1MDMsIm5iZiI6MTY0NDgzOTUwMywiZXhwIjoxNjQ0ODU3NTAzLCJpc3MiOiJodHRwczovL3M0MDIzNDAubGFiYWdoLnBsL0FQSSIsImRhdGEiOnsiaWQiOiIxIiwiYWNjVHlwZSI6IkltcG9ydGVyIn19.g7PMjsIzOf4KoGxYY3dL6OJR2F7RPUZ045QGypbh35k",
+            jwt: Cookies.get('jwt'),
         }
         fetch('https://s402340.labagh.pl/API/Importer/get-importer-data.php', {
             method: 'POST',
@@ -48,7 +49,7 @@ export class ImporterPage extends React.Component {
 
 
     render() {
-        const Data = this.state.Data;
+        const  Data = this.state.Data;
         const AreWeRender = this.state.ShouldWeRender;
         console.log(this.state.Data.name);
         return (

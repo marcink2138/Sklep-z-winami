@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import profilePicture from "../userdefault.png";
 import "./style.scss";
 import Order from "./order";
+import Cookies from 'js-cookie'
 
 export class Imports extends React.Component {
 
@@ -20,7 +21,7 @@ export class Imports extends React.Component {
     GetImports() {
         let json
         const data = {
-            jwt: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDQ4Mzk1MDMsIm5iZiI6MTY0NDgzOTUwMywiZXhwIjoxNjQ0ODU3NTAzLCJpc3MiOiJodHRwczovL3M0MDIzNDAubGFiYWdoLnBsL0FQSSIsImRhdGEiOnsiaWQiOiIxIiwiYWNjVHlwZSI6IkltcG9ydGVyIn19.g7PMjsIzOf4KoGxYY3dL6OJR2F7RPUZ045QGypbh35k",
+            jwt: Cookies.get('jwt'),
         }
         fetch('https://s402340.labagh.pl/API/Importer/get-importer-wines.php', {
             method: 'POST',
@@ -48,6 +49,7 @@ export class Imports extends React.Component {
     }
 
     ButtonPress = (e) => {
+        //przejscie do
     }
 
     render(){
@@ -58,7 +60,7 @@ export class Imports extends React.Component {
             <div className="container-basket">
                 <div className="user-container">
                     <div className="header">Importy</div>
-                    <div>
+                    <div > 
                         {AreWeRender
                             && importList.map((order) => (
                                 <Order
@@ -69,13 +71,14 @@ export class Imports extends React.Component {
                                     quantity={order.quantity}
                                     wine_type={order.wine_type}
                                     alcoholic_strength={order.alcoholic_strength}
+                                    id={order.id}
                                 />
                             ))
                         }
                     </div>
                     <div className="footeroutside">
                         <button type="button" className="btn" onClick={this.ButtonPress}>
-                            Dodaj
+                            Dodaj wino
                         </button>
                     </div>
                 </div>
