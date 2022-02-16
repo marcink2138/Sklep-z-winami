@@ -65,7 +65,7 @@
     }
 
     .form {
-        margin-top: 2em;
+        margin-top: 1em;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -121,7 +121,7 @@
     }
 }
 
-.userpage{
+.userpageadd{
     width: 25em;
     height: 50em;
     //min-height: 44em;
@@ -131,7 +131,7 @@
     margin-top: 5px;
     position: relative;
     z-index: 99;
-    .container-user {
+    .container-useradd {
       display: flex;
       justify-content: left;
       align-items: center;

@@ -8,11 +8,8 @@ export class UserPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ShouldWeRender: true,
-            Data: ["user"],
-            name: "",
-            krs: "",
-            winesNumber: ""
+            ShouldWeRender: false,
+            Data: []
 
             //ImporterDate: this.GetImporter(),
         }
@@ -21,37 +18,39 @@ export class UserPage extends React.Component {
     }
 
     GetImporter() {
-        // let json
-        // const data = {
-        //     jwt: Cookies.get('jwt'),
-        // }
-        // fetch('https://s402340.labagh.pl/API/Importer/get-importer-data.php', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(data),
-        // })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         console.log('Success:', data);
-        //         data = data.wines;
-        //         this.setState({ Data: data })
-        //         //data = JSON.parse(data);
-        //         this.setState({ ShouldWeRender: true })
-        //         json = data;
-        //     })
-        //     .catch((error) => {
-        //         console.error('Error', error);
-        //     });
-        // //return json
+        let json
+        const data = {
+            jwt: Cookies.get('jwt'),
+        }
+        fetch('https://s402340.labagh.pl/API/Customer/get-customer-data.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                data = data.customerData;
+                this.setState({ Data: data })
+                //data = JSON.parse(data);
+                this.setState({ ShouldWeRender: true })
+                json = data;
+            })
+            .catch((error) => {
+                console.error('Error', error);
+            });
+        //return json
     }
 
+    hanldeDodajDane = (e) => {
+        //Przejscie do addaddress
+    }
 
     render() {
         const Data = this.state.Data;
         const AreWeRender = this.state.ShouldWeRender;
-        console.log(this.state.Data.name);
         return (
             <div className="userpage">
                 <div className="container-user">
@@ -64,23 +63,53 @@ export class UserPage extends React.Component {
                             {AreWeRender && Data.map((user) => (
                                 <div className="form">
                                     <div className="form-group">
-                                        <label htmlFor="Name">Login: </label>
+                                        <label htmlFor="Name">Imie: </label>
                                     </div>
                                     <div className="form-group2">
-                                        <label htmlFor="Name2">login</label>
+                                        <label htmlFor="Name2">{user.first_name}</label>
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="KRS">Adress: </label>
+                                        <label htmlFor="KRS">Nazwisko: </label>
                                     </div>
                                     <div className="form-group2">
-                                        <label htmlFor="KRS2">adress</label>
+                                        <label htmlFor="KRS2">{user.last_name}</label>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="Name">Miasto: </label>
+                                    </div>
+                                    <div className="form-group2">
+                                        <label htmlFor="Name2">{user.address_city}</label>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="KRS">Kod pocztowy: </label>
+                                    </div>
+                                    <div className="form-group2">
+                                        <label htmlFor="KRS2">{user.address_postal_code}</label>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="Name">Ulica: </label>
+                                    </div>
+                                    <div className="form-group2">
+                                        <label htmlFor="Name2">{user.address_street}</label>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="KRS">Email: </label>
+                                    </div>
+                                    <div className="form-group2">
+                                        <label htmlFor="KRS2">{user.email}</label>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="KRS">Telefon: </label>
+                                    </div>
+                                    <div className="form-group2">
+                                        <label htmlFor="KRS2">{user.mobile}</label>
                                     </div>
                                 </div>))}
-                            {/* <div className="footer">
-                                <button type="button" className="btn" >
-                                    Zmień hasło
+                            <div className="footer">
+                                <button type="button" className="btn" onClick={this.hanldeDodajDane}>
+                                    Dodaj dane
                                 </button>
-                            </div> */}
+                            </div>
                         </div>
                     </div>
                 </div>
