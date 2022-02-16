@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./style.scss";
 import Cookies from 'js-cookie'
 
-export class AddAddress extends React.Component {
+export default class AddAddress extends React.Component {
 
     constructor(props) {
         super(props);

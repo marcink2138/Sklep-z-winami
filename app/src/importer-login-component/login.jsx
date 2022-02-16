@@ -6,6 +6,9 @@ class LoginImporterComponent extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            isFailed: false
+        }
     }
 
     handleLoginChange = (e) => {
@@ -33,8 +36,12 @@ class LoginImporterComponent extends React.Component {
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
-            Cookies.set('jwt', data.jwt);
-            this.props.history.push('/ImporterPage');
+            if (data.hasOwnProperty('jwt')) {
+                Cookies.set('jwt', data.jwt);
+                this.props.history.push('/ProductList');
+            } else {
+                this.setState( {isFailed: true} );
+            }
         })
         .catch((error) => {
             console.error('Error', error);
@@ -63,6 +70,11 @@ class LoginImporterComponent extends React.Component {
                     <button type="button" className="btn" onClick={this.handleLogin}>
                         Zaloguj
                     </button>
+                    <div>
+                        {this.state.isFailed &&
+                        <div className="errorLogin">Błędny login lub hasło</div>
+                        }
+                    </div>
                 </div>
             </div>
         </div> )

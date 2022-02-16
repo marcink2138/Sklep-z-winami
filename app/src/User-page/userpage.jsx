@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import profilePicture from "../userdefault.png";
 import "./style.scss";
 import Cookies from 'js-cookie'
-
-export class UserPage extends React.Component {
+import { withRouter } from "react-router";
+class UserPageComponent extends React.Component {
 
     constructor(props) {
         super(props);
@@ -45,7 +45,7 @@ export class UserPage extends React.Component {
     }
 
     hanldeDodajDane = (e) => {
-        //Przejscie do addaddress
+        this.props.history.push('/AddressData');
     }
 
     render() {
@@ -116,3 +116,5 @@ export class UserPage extends React.Component {
             </div>);
     }
 }
+
+export const UserPage = withRouter(UserPageComponent)

@@ -8,6 +8,7 @@ import Filter from "./filter-component/filter"
 import FinalImporterPage from "./Importer-page/finalimporterpage";
 import AddWine from "./addwine-page/addwine";
 import FinalUserPage from "./User-page/finaluserpage";
+import AddAddress from "./add-address-page/addaddress";
 export default class Routes extends Component {
     render() {
         return (
@@ -19,6 +20,7 @@ export default class Routes extends Component {
                 <Route path="/ImporterPage" component={FinalImporterPage} />
                 <Route path="/AddWinePage" component={AddWine} />
                 <Route path="/UserPage" component={FinalUserPage} />
+                <Route path="/AddressData" component={AddAddress} />
             </Switch>
         )
     }
