@@ -1,5 +1,4 @@
 <?php
-include_once 'errorConfig.php';
 
 date_default_timezone_set('Europe/Warsaw');
 

@@ -1,5 +1,4 @@
 <?php
-include_once '../config/errorConfig.php';
 include_once '../CustomerManagement/CustomerManagement.php';
 include_once '../DatabaseConnection/DatabaseConn.php';
 include_once '../config/tokenCore.php';
@@ -168,6 +167,30 @@ class CustomerAPI
             echo json_encode(array(
                 'customerData' => $dataFromDB
             ));
+        } else {
+            http_response_code(403);
+            echo json_encode(array(
+                "message" => "Access denied!"
+            ));
+        }
+    }
+
+    public function updateCustomerData(){
+        $data = json_decode(file_get_contents("php://input"));
+        $jwt = isset($data->jwt) ? $data->jwt : "";
+        $customerData = TokenManagement::decodeToken($jwt);
+        if ($customerData->accType == CustomerAPI::$accType) {
+            if ($this->customerManagement->updateCustomerData($customerData->id, $data)){
+                http_response_code(200);
+                echo json_encode(array(
+                    "message" => "Customer data updated"
+                ));
+            }else{
+                http_response_code(400);
+                echo json_encode(array(
+                    "message" => "Error during updating data"
+                ));
+            }
         } else {
             http_response_code(403);
             echo json_encode(array(

@@ -1,5 +1,4 @@
 <?php
-include_once '../config/errorConfig.php';
 
 class WinesManagement
 {
@@ -66,7 +65,10 @@ class WinesManagement
 
     public function filterWines()
     {
-        $query = "SELECT * FROM wine WHERE 1";
+        //$query = "SELECT * FROM wine WHERE quantity<> 0";
+        $query = "SELECT wine.id, wine.country, wine.price, wine.name, wine.wine_type, wine.id_importer, wine.capacity, 
+        wine.alcoholic_strength, wine.quantity, wine.img_path, importer.name AS importerName FROM `wine`, `importer` 
+        WHERE importer.id_importer = wine.id_importer AND quantity<>0";
         $filters = $this->getFilters();
         if (!empty($filters)) {
             foreach ($filters as $filter) {
@@ -101,28 +103,28 @@ class WinesManagement
             parse_str($urlComponents['query'], $this->params);
         }
         if (isset($this->params['country'])) {
-            $filters[] = " AND country = :country";
+            $filters[] = " AND wine.country = :country";
         }
         if (isset($this->params['importerName'])) {
-            $filters[] = " AND id_importer = (SELECT id_importer FROM importer WHERE name = :importerName)";
+            $filters[] = " AND importer.name = :importerName";
         }
         if (isset($this->params['price'])) {
             if ($this->params['price'] == "DESC") {
-                $filters[] = " ORDER BY price DESC";
+                $filters[] = " ORDER BY wine.price DESC";
             } else {
-                $filters[] = " ORDER BY price ASC";
+                $filters[] = " ORDER BY wine.price ASC";
             }
         } elseif (isset($this->params['quantity'])) {
             if ($this->params['quantity'] == "DESC") {
-                $filters[] = " ORDER BY quantity DESC";
+                $filters[] = " ORDER BY wine.quantity DESC";
             } else {
-                $filters[] = " ORDER BY quantity ASC";
+                $filters[] = " ORDER BY wine.quantity ASC";
             }
         } elseif (isset($this->params['name'])) {
             if ($this->params['name'] == "DESC") {
-                $filters[] = " ORDER BY name DESC";
+                $filters[] = " ORDER BY wine.name DESC";
             } else {
-                $filters[] = " ORDER BY name ASC";
+                $filters[] = " ORDER BY wine.name ASC";
             }
         }
         return $filters;

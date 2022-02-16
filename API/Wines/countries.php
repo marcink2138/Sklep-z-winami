@@ -1,5 +1,4 @@
 <?php
-include_once '../config/errorConfig.php';
 include_once '../WinesManagement/WinesManagement.php';
 include_once '../WinesManagement/WinesAPI.php';
 include_once '../errorfun.php';

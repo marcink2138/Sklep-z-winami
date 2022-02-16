@@ -1,5 +1,4 @@
 <?php
-include_once '../config/errorConfig.php';
 include_once '../ImporterManagement/ImporterAPI.php';
 include_once '../errorfun.php';
 //register_shutdown_function('my_error_handler');

@@ -1,5 +1,4 @@
 <?php
-include_once '../config/errorConfig.php';
 
 class DatabaseConn
 {

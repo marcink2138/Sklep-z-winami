@@ -1,5 +1,4 @@
 <?php
-include_once '../config/errorConfig.php';
 
 class CustomerManagement
 {
@@ -171,6 +170,33 @@ class CustomerManagement
                 "message"=>"DB error"
             )));
         }
+    }
+
+    public function updateCustomerData($customerId, $data){
+        $query = "UPDATE customers SET first_name = :first_name, last_name = :last_name, address_city = :address_city, address_postal_code = :address_postal_code, address_street=:address_street, mobile = :mobile WHERE customers.id = :customerId";
+        $firstName = htmlspecialchars(strip_tags($data->firstName));
+        $lastName = htmlspecialchars(strip_tags($data->lastName));
+        $addressCity = htmlspecialchars(strip_tags($data->addressCity));
+        $addressPostalCode = htmlspecialchars(strip_tags($data->addressPostalCode));
+        $addressStreet = htmlspecialchars(strip_tags($data->addressStreet));
+        $mobile = htmlspecialchars(strip_tags($data->mobile));
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":first_name", $firstName);
+        $stmt->bindParam(":last_name", $lastName);
+        $stmt->bindParam(":address_city", $addressCity);
+        $stmt->bindParam(":address_postal_code", $addressPostalCode);
+        $stmt->bindParam(":address_street", $addressStreet);
+        $stmt->bindParam(":mobile", $mobile);
+        $stmt->bindParam(":customerId", $customerId);
+        try {
+            if ($stmt->execute())
+                return true;
+            return false;
+        }catch (PDOException $e){
+            return false;
+        }
+
     }
     
 

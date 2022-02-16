@@ -1,6 +1,5 @@
 <?php
 
-include_once '../config/errorConfig.php';
 include_once '../CustomerManagement/CustomerAPI.php';
 include_once '../errorfun.php';
 //register_shutdown_function('my_error_handler');

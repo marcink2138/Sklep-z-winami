@@ -1,5 +1,4 @@
 <?php
-include_once '../config/errorConfig.php';
 include_once '../Auth/TokenManagement.php';
 include_once '../DatabaseConnection/DatabaseConn.php';
 include_once 'ImporterManagement.php';

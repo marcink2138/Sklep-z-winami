@@ -38,7 +38,7 @@ class LoginImporterComponent extends React.Component {
             console.log('Success:', data);
             if (data.hasOwnProperty('jwt')) {
                 Cookies.set('jwt', data.jwt);
-                this.props.history.push('/ProductList');
+                this.props.history.push('/ImporterPage');
             } else {
                 this.setState( {isFailed: true} );
             }
